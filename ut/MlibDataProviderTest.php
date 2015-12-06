@@ -63,6 +63,13 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($val, "bean");
     }
 
+    public function testOptionalWithoutDefault()
+    {
+        $val = $this->dp->getOptional("java", ArrayDataProvider::STRING_TYPE);
+        $this->assertEquals($val, null);
+        $this->assertTrue($val !== '');
+    }
+
     public function testOptionalExist()
     {
         $this->assertEquals(true, $this->dp->getOptional("bool", ArrayDataProvider::BOOL_TYPE, false));
