@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36ca841c65230c33c0ccac00b386eb6e",
+    "hash": "98103b4674232f271aad317883b6dc2e",
     "content-hash": "3fa6b3fa0f61d8b6ea7255023dbe3f4b",
     "packages": [
         {
             "name": "voku/portable-utf8",
-            "version": "1.6.17",
+            "version": "1.6.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/portable-utf8.git",
-                "reference": "360af3aa02b7ce98a3c59640a65b4d93f4ebf932"
+                "reference": "b49c259b0f5c563422d466d10802c5db35328000"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/portable-utf8/zipball/360af3aa02b7ce98a3c59640a65b4d93f4ebf932",
-                "reference": "360af3aa02b7ce98a3c59640a65b4d93f4ebf932",
+                "url": "https://api.github.com/repos/voku/portable-utf8/zipball/b49c259b0f5c563422d466d10802c5db35328000",
+                "reference": "b49c259b0f5c563422d466d10802c5db35328000",
                 "shasum": ""
             },
             "require": {
@@ -74,10 +74,92 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-11-08 11:41:16"
+            "time": "2015-12-06 21:26:23"
         }
     ],
     "packages-dev": [
+        {
+            "name": "bramus/ansi-php",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bramus/ansi-php.git",
+                "reference": "c0dcf9a949e1c6111bbbb52a8ead34776064b209"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bramus/ansi-php/zipball/c0dcf9a949e1c6111bbbb52a8ead34776064b209",
+                "reference": "c0dcf9a949e1c6111bbbb52a8ead34776064b209",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bramus\\Ansi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bramus Van Damme",
+                    "email": "bramus@bram.us",
+                    "homepage": "https://www.bram.us/"
+                }
+            ],
+            "description": "ANSI Control Functions and ANSI Control Sequences (Colors, Erasing, etc.) for PHP CLI Apps",
+            "time": "2015-01-08 15:02:37"
+        },
+        {
+            "name": "bramus/monolog-colored-line-formatter",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bramus/monolog-colored-line-formatter.git",
+                "reference": "6bff15eee00afe2690642535b0f1541f10852c2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bramus/monolog-colored-line-formatter/zipball/6bff15eee00afe2690642535b0f1541f10852c2b",
+                "reference": "6bff15eee00afe2690642535b0f1541f10852c2b",
+                "shasum": ""
+            },
+            "require": {
+                "bramus/ansi-php": "~3.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "~1.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bramus\\Monolog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bramus Van Damme",
+                    "email": "bramus@bram.us",
+                    "homepage": "https://www.bram.us/"
+                }
+            ],
+            "description": "Colored Line Formatter for Monolog",
+            "time": "2015-01-07 22:12:35"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
@@ -131,6 +213,83 @@
                 "instantiate"
             ],
             "time": "2015-06-14 21:17:01"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.17.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
+                "php-console/php-console": "^3.1.3",
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "2.3.0",
+                "raven/raven": "^0.13",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "swiftmailer/swiftmailer": "~5.3",
+                "videlalvaro/php-amqplib": "~2.4"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "raven/raven": "Allow sending log messages to a Sentry server",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.16.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2015-10-14 12:51:02"
         },
         {
             "name": "myclabs/deep-copy",
@@ -525,16 +684,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.1.0",
+            "version": "5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "01fb97441708f1616a97cfd3f5c36101db81c635"
+                "reference": "c047ff05d2279404af9a7e89e2a7151c32c88022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/01fb97441708f1616a97cfd3f5c36101db81c635",
-                "reference": "01fb97441708f1616a97cfd3f5c36101db81c635",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c047ff05d2279404af9a7e89e2a7151c32c88022",
+                "reference": "c047ff05d2279404af9a7e89e2a7151c32c88022",
                 "shasum": ""
             },
             "require": {
@@ -550,7 +709,7 @@
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": ">=1.0.6",
-                "phpunit/phpunit-mock-objects": ">=3.0",
+                "phpunit/phpunit-mock-objects": ">=3.0.5",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
                 "sebastian/environment": "~1.3",
@@ -595,20 +754,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-12-03 16:45:01"
+            "time": "2015-12-10 07:54:54"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.0.4",
+            "version": "3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "b28b029356e65091dfbf8c2bc4ef106ffece509e"
+                "reference": "49bc700750196c04dd6bc2c4c99cb632b893836b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b28b029356e65091dfbf8c2bc4ef106ffece509e",
-                "reference": "b28b029356e65091dfbf8c2bc4ef106ffece509e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/49bc700750196c04dd6bc2c4c99cb632b893836b",
+                "reference": "49bc700750196c04dd6bc2c4c99cb632b893836b",
                 "shasum": ""
             },
             "require": {
@@ -651,7 +810,45 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-11-09 15:37:17"
+            "time": "2015-12-08 08:47:06"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
         },
         {
             "name": "sebastian/comparator",
@@ -719,28 +916,28 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "1.3.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "863df9687835c62aa423a22412d26fa2ebde3fd3"
+                "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/863df9687835c62aa423a22412d26fa2ebde3fd3",
-                "reference": "863df9687835c62aa423a22412d26fa2ebde3fd3",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/13edfd8706462032c2f52b4b862974dd46b71c9e",
+                "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.2"
+                "phpunit/phpunit": "~4.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -763,11 +960,11 @@
                 }
             ],
             "description": "Diff implementation",
-            "homepage": "http://www.github.com/sebastianbergmann/diff",
+            "homepage": "https://github.com/sebastianbergmann/diff",
             "keywords": [
                 "diff"
             ],
-            "time": "2015-02-22 15:13:53"
+            "time": "2015-12-08 07:14:41"
         },
         {
             "name": "sebastian/environment",
@@ -938,16 +1135,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "994d4a811bafe801fb06dccbee797863ba2792ba"
+                "reference": "913401df809e99e4f47b27cdd781f4a258d58791"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/994d4a811bafe801fb06dccbee797863ba2792ba",
-                "reference": "994d4a811bafe801fb06dccbee797863ba2792ba",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/913401df809e99e4f47b27cdd781f4a258d58791",
+                "reference": "913401df809e99e4f47b27cdd781f4a258d58791",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +1184,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2015-06-21 08:04:50"
+            "time": "2015-11-11 19:50:13"
         },
         {
             "name": "sebastian/resource-operations",
@@ -1068,16 +1265,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002"
+                "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
-                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3df409958a646dad2bc5046c3fb671ee24a1a691",
+                "reference": "3df409958a646dad2bc5046c3fb671ee24a1a691",
                 "shasum": ""
             },
             "require": {
@@ -1113,7 +1310,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:36:17"
+            "time": "2015-12-26 13:39:53"
         }
     ],
     "aliases": [],
