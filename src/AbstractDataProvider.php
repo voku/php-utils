@@ -37,27 +37,27 @@ abstract class AbstractDataProvider
                 throw new MandatoryValueMissingException("Mandatory value $key is missing in data");
             }
             else {
-                $value = $default;
+                return $default;
             }
         }
+        else {
 
-        if (!in_array(
-            $type,
-            [
-                self::INT_TYPE,
-                self::FLOAT_TYPE,
-                self::STRING_TYPE,
-                self::ARRAY_TYPE,
-                self::BOOL_TYPE,
-            ]
-        )
-        ) {
-            throw new InvalidDataTypeException("Type $type is not an allowed type");
+            if (!in_array(
+                $type,
+                [
+                    self::INT_TYPE,
+                    self::FLOAT_TYPE,
+                    self::STRING_TYPE,
+                    self::ARRAY_TYPE,
+                    self::BOOL_TYPE,
+                ]
+            )
+            ) {
+                throw new InvalidDataTypeException("Type $type is not an allowed type");
+            }
+
+            return $this->{$type}($value);
         }
-
-        $typed_value = $this->{$type}($value);
-
-        return $typed_value;
     }
 
     public function getMandatory($key, $type = self::STRING_TYPE)
