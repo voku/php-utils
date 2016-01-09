@@ -29,6 +29,19 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
             "bool"         => true,
             "bool_str_on"  => "on",
             "bool_str_off" => "off",
+            "a"            => [
+                "b"   => [
+                    "c" => 55,
+                    "d" => [
+                        "g" => 33,
+                    ],
+                ],
+                "d.e" => 66,
+                "d"   => [
+                    "e" => 77,
+                ],
+            ],
+            "a.x"          => "y",
         ];
         $this->dp = new ArrayDataProvider($data);
     }
@@ -44,6 +57,18 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->dp->getMandatory("int", ArrayDataProvider::FLOAT_TYPE));
         $this->assertEquals(2.4, $this->dp->getMandatory("float", ArrayDataProvider::FLOAT_TYPE));
         $this->assertEquals(0, $this->dp->getMandatory("string", ArrayDataProvider::FLOAT_TYPE));
+    }
+
+    public function testCascadeGet()
+    {
+        $this->dp->setCascadeDelimiter(".");
+        $this->assertEquals(55, $this->dp->getMandatory("a.b.c", ArrayDataProvider::INT_TYPE));
+        $this->assertEquals(33, $this->dp->getMandatory("a.b.d.g", ArrayDataProvider::INT_TYPE));
+        $this->assertEquals(66, $this->dp->getMandatory("a.d.e", ArrayDataProvider::INT_TYPE));
+        $this->assertEquals('y', $this->dp->getMandatory("a.x", ArrayDataProvider::STRING_TYPE));
+
+        $this->setExpectedException(MandatoryValueMissingException::class);
+        $this->dp->getMandatory('a.b.c.d');
     }
 
     public function testMandatoryOk()

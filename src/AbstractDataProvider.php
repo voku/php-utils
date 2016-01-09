@@ -18,6 +18,7 @@ abstract class AbstractDataProvider
     const ARRAY_TYPE  = "requireArray";
     const BOOL_TYPE   = "requireBool";
 
+
     /**
      * @param            $key
      * @param string     $type
