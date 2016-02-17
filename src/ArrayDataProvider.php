@@ -8,6 +8,7 @@
 namespace Oasis\Mlib\Utils;
 
 class ArrayDataProvider extends AbstractDataProvider
+    implements CascadeDataProviderInterface
 {
     protected $data              = [];
     protected $cascade_delimiter = null;
