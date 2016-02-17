@@ -70,6 +70,18 @@ trait DataProviderTypeParserTrait
         return $val;
     }
 
+    protected function requireArray2D(&$val)
+    {
+        $arr = $this->requireArray($val);
+        foreach ($arr as $k => &$v) {
+            if (!is_array($v)) {
+                throw new InvalidDataTypeException("Non array element encountered when 2D array is expected");
+            }
+        }
+
+        return $arr;
+    }
+
     protected function requireBool(&$val)
     {
         if (is_bool($val)) {

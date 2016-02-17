@@ -7,6 +7,7 @@
  */
 
 use Oasis\Mlib\Utils\ArrayDataProvider;
+use Oasis\Mlib\Utils\Exceptions\InvalidDataTypeException;
 use Oasis\Mlib\Utils\Exceptions\MandatoryValueMissingException;
 
 class MlibDataProviderTest extends PHPUnit_Framework_TestCase
@@ -16,7 +17,7 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $data     = [
+        $data = [
             "int"          => 1,
             "float"        => 2.4,
             "string"       => "name",
@@ -40,6 +41,11 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
                 "d"   => [
                     "e" => 77,
                 ],
+            ],
+            "2darray"      => [
+                [1, 2],
+                [3, 4],
+                [5, 6],
             ],
             "a.x"          => "y",
         ];
@@ -69,6 +75,31 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException(MandatoryValueMissingException::class);
         $this->dp->getMandatory('a.b.c.d');
+    }
+
+    public function test2DArrayGet()
+    {
+        $a = $this->dp->getMandatory('2darray', ArrayDataProvider::ARRAY_2D_TYPE);
+        $this->assertTrue(is_array($a));
+        foreach ($a as $idx => $val) {
+            $this->assertTrue(is_array($val), "for 'a', value at #$idx is not array, value = " . json_encode($val));
+        }
+    }
+
+    public function testInvalidDataTypeExpectingArray()
+    {
+        $this->dp->getMandatory('int', ArrayDataProvider::INT_TYPE);
+
+        $this->setExpectedException(InvalidDataTypeException::class);
+        $this->dp->getMandatory('int', ArrayDataProvider::ARRAY_TYPE);
+    }
+
+    public function testInvalidDataTypeExpectingNotArray()
+    {
+        $this->dp->getMandatory('array', ArrayDataProvider::ARRAY_TYPE);
+
+        $this->setExpectedException(InvalidDataTypeException::class);
+        $this->dp->getMandatory('array', ArrayDataProvider::INT_TYPE);
     }
 
     public function testMandatoryOk()

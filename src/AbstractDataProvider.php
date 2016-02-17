@@ -45,6 +45,7 @@ abstract class AbstractDataProvider implements DataProviderInterface
                     self::FLOAT_TYPE,
                     self::STRING_TYPE,
                     self::ARRAY_TYPE,
+                    self::ARRAY_2D_TYPE,
                     self::BOOL_TYPE,
                 ]
             )
