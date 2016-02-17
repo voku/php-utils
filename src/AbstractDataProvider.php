@@ -50,10 +50,14 @@ abstract class AbstractDataProvider implements DataProviderInterface
                 ]
             )
             ) {
-                throw new InvalidDataTypeException("Type $type is not an allowed type");
+                throw new InvalidDataTypeException("For key <$key>, tyype '$type' is not an allowed type");
             }
 
-            return $this->parseValue($type, $value);
+            try {
+                return $this->parseValue($type, $value);
+            } catch (InvalidDataTypeException $e) {
+                throw new InvalidDataTypeException("For key <$key>: " . $e->getMessage(), $e->getCode(), $e);
+            }
         }
     }
 
