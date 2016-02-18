@@ -8,10 +8,11 @@
 namespace Oasis\Mlib\Utils;
 
 class ArrayDataProvider extends AbstractDataProvider
-    implements CascadeDataProviderInterface
+    implements HierarchicalDataProviderInterface
 {
-    protected $data              = [];
-    protected $cascade_delimiter = null;
+    protected $data      = [];
+    protected $delimeter = ".";
+    protected $paths     = [];
 
     function __construct(array $data)
     {
@@ -23,43 +24,84 @@ class ArrayDataProvider extends AbstractDataProvider
      */
     protected function getValue($key)
     {
-        if (!array_key_exists($key, $this->data)) {
-            $value = null;
+        return $this->getRealValue($key, true);
+    }
 
-            if ($this->cascade_delimiter) {
-                $parts = explode($this->cascade_delimiter, $key);
-                for ($i = 0; $i < count($parts) - 1; ++$i) {
-                    $branch = implode($this->cascade_delimiter, array_slice($parts, 0, $i + 1));
-                    $leaf   = implode($this->cascade_delimiter, array_slice($parts, $i + 1));
-                    if (is_array($leafNode = $this->getValue($branch))) {
-                        $leafDp = new ArrayDataProvider($leafNode);
-                        $value  = $leafDp->getValue($leaf);
-                    }
-                    if ($value !== null) {
-                        break;
-                    }
-                }
+    protected function getRealValue($key, $isRelative = false)
+    {
+        $data = $this->data;
+        if ($isRelative && $this->paths) {
+            $data = $this->getRealValue(implode($this->delimeter, $this->paths));
+            if (!is_array($data)) {
+                return null;
             }
-
-            return $value;
         }
 
-        return $this->data[$key];
+        $parts     = explode($this->delimeter, $key);
+        $branchKey = '';
+        while (sizeof($parts) > 0) {
+            $currentKey = implode($this->delimeter, $parts);
+            if ($branchKey == '' && array_key_exists($currentKey, $data)) {
+                return $data[$currentKey];
+            }
+            $branchKey .= (strlen($branchKey) > 0 ? '.' : '') . $parts[0];
+            array_shift($parts);
+            if (array_key_exists($branchKey, $data) && is_array($data[$branchKey])) {
+                $data      = &$data[$branchKey];
+                $branchKey = '';
+            }
+        }
+
+        return null;
     }
 
     /**
      * @return string
      */
-    public function getCascadeDelimiter()
+    public function getPathDelimiter()
     {
-        return $this->cascade_delimiter;
+        return $this->delimeter;
     }
 
     /**
-     * @param string $cascade_delimiter
+     * @param string $delimeter
      */
-    public function setCascadeDelimiter($cascade_delimiter)
+    public function setPathDelimiter($delimeter)
     {
-        $this->cascade_delimiter = $cascade_delimiter;
+        if (strlen($delimeter) != 1) {
+            throw new \InvalidArgumentException(
+                "Cascade delimiter should be a single character. given = " . $delimeter
+            );
+        }
+        $this->delimeter = $delimeter;
+    }
+
+    public function getCurrentPath()
+    {
+        return implode($this->delimeter, $this->paths);
+    }
+
+    public function setCurrentPath($path)
+    {
+        if (!$path) {
+            $this->paths = [];
+        }
+        else {
+            $this->paths = explode($this->delimeter, $path);
+        }
+
+    }
+
+    public function pushPath($relativePath)
+    {
+        $parts       = explode($this->delimeter, $relativePath);
+        $this->paths = array_merge($this->paths, $parts);
+    }
+
+    public function popPath()
+    {
+        if (sizeof($this->paths) > 0) {
+            array_pop($this->paths);
+        }
     }
 }

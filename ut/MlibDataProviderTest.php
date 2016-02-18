@@ -17,7 +17,7 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $data = [
+        $data     = [
             "int"          => 1,
             "float"        => 2.4,
             "string"       => "name",
@@ -65,9 +65,8 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $this->dp->getMandatory("string", ArrayDataProvider::FLOAT_TYPE));
     }
 
-    public function testCascadeGet()
+    public function testHierarchicalGet()
     {
-        $this->dp->setCascadeDelimiter(".");
         $this->assertEquals(55, $this->dp->getMandatory("a.b.c", ArrayDataProvider::INT_TYPE));
         $this->assertEquals(33, $this->dp->getMandatory("a.b.d.g", ArrayDataProvider::INT_TYPE));
         $this->assertEquals(66, $this->dp->getMandatory("a.d.e", ArrayDataProvider::INT_TYPE));
@@ -75,6 +74,24 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException(MandatoryValueMissingException::class);
         $this->dp->getMandatory('a.b.c.d');
+    }
+
+    public function testPathPushPop()
+    {
+        $this->dp->pushPath('a');
+        $this->assertTrue(is_array($this->dp->getMandatory('b', ArrayDataProvider::ARRAY_TYPE)));
+        $this->assertEquals(55, $this->dp->getMandatory('b.c', ArrayDataProvider::INT_TYPE));
+        $this->dp->pushPath('b');
+        $this->assertEquals(55, $this->dp->getMandatory('c', ArrayDataProvider::INT_TYPE));
+        $this->assertEquals(33, $this->dp->getMandatory('d.g', ArrayDataProvider::INT_TYPE));
+
+        $this->dp->popPath();
+        $this->assertEquals(66, $this->dp->getMandatory("d.e", ArrayDataProvider::INT_TYPE));
+        $this->dp->pushPath('d');
+        $this->assertEquals(77, $this->dp->getMandatory("e", ArrayDataProvider::INT_TYPE));
+
+        $this->dp->setCurrentPath('');
+        $this->assertEquals(66, $this->dp->getMandatory('a.d.e', ArrayDataProvider::INT_TYPE));
     }
 
     public function test2DArrayGet()
