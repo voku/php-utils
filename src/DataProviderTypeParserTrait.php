@@ -108,4 +108,18 @@ trait DataProviderTypeParserTrait
 
         return intval($val) ? true : false;
     }
+
+    protected function requireObject(&$val)
+    {
+        if (is_object($val)) {
+            return $val;
+        }
+
+        throw new InvalidDataTypeException("Value is not an object, value = " . print_r($val, true));
+    }
+
+    protected function requireMixed(&$val)
+    {
+        return $val;
+    }
 }

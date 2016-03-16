@@ -16,6 +16,8 @@ interface DataProviderInterface
     const ARRAY_TYPE    = "requireArray";
     const ARRAY_2D_TYPE = "requireArray2D";
     const BOOL_TYPE     = "requireBool";
+    const OBJECT_TYPE   = "requireObject";
+    const MIXED_TYPE    = "requireMixed";
 
     public function get($key, $type = self::STRING_TYPE, $isMandatory = false, $default = null);
 

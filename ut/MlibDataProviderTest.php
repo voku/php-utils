@@ -48,6 +48,7 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
                 [5, 6],
             ],
             "a.x"          => "y",
+
         ];
         $this->dp = new ArrayDataProvider($data);
     }
@@ -63,6 +64,12 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->dp->getMandatory("int", ArrayDataProvider::FLOAT_TYPE));
         $this->assertEquals(2.4, $this->dp->getMandatory("float", ArrayDataProvider::FLOAT_TYPE));
         $this->assertEquals(0, $this->dp->getMandatory("string", ArrayDataProvider::FLOAT_TYPE));
+        $this->assertEquals(
+            \stdClass::class,
+            get_class($this->dp->getMandatory("object", ArrayDataProvider::OBJECT_TYPE))
+        );
+        $this->assertNotEquals(0, $this->dp->getMandatory("string", ArrayDataProvider::MIXED_TYPE));
+        $this->assertEquals('name', $this->dp->getMandatory("string", ArrayDataProvider::MIXED_TYPE));
     }
 
     public function testHierarchicalGet()
