@@ -22,7 +22,6 @@ class StringUtils
      * @param bool $lengthUnitInByte
      *
      * @return string
-     * @internal param bool $isUTF8
      *
      */
     public static function stringChopdown($str, $maxLength, $lengthUnitInByte = false)
