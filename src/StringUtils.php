@@ -17,13 +17,18 @@ class StringUtils
      *
      * This function is UTF8 compatible
      *
-     * @param $str
-     * @param $maxLength
+     * @param      $str
+     * @param      $maxLength
+     * @param bool $isUTF8
      *
      * @return string
      */
-    public static function stringChopdown($str, $maxLength)
+    public static function stringChopdown($str, $maxLength, $isUTF8 = true)
     {
+        if (!$isUTF8) {
+            return substr($str, 0, $maxLength);
+        }
+
         $str = UTF8::to_utf8($str);
         $len = UTF8::strlen($str);
         if ($len <= $maxLength) {
