@@ -34,7 +34,7 @@ class StringUtilsTest extends PHPUnit_Framework_TestCase
 
         $chinese = "中国人";
         $this->assertEquals("中", StringUtils::stringChopdown($chinese, 1));
-        $this->assertNotEquals("中", StringUtils::stringChopdown($chinese, 1, false));
-        $this->assertEquals("中", StringUtils::stringChopdown($chinese, 3, false));
+        $this->assertNotEquals("中", StringUtils::stringChopdown($chinese, 1, true));
+        $this->assertEquals("中", StringUtils::stringChopdown($chinese, 3, true));
     }
 }

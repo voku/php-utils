@@ -19,13 +19,15 @@ class StringUtils
      *
      * @param      $str
      * @param      $maxLength
-     * @param bool $isUTF8
+     * @param bool $lengthUnitInByte
      *
      * @return string
+     * @internal param bool $isUTF8
+     *
      */
-    public static function stringChopdown($str, $maxLength, $isUTF8 = true)
+    public static function stringChopdown($str, $maxLength, $lengthUnitInByte = false)
     {
-        if (!$isUTF8) {
+        if ($lengthUnitInByte) {
             return substr($str, 0, $maxLength);
         }
 
