@@ -2,11 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: minhao
- * Date: 2015-09-15
- * Time: 11:51
+ * Date: 2016-05-16
+ * Time: 15:26
  */
+
 namespace Oasis\Mlib\Utils\Exceptions;
 
-class InvalidDataTypeException extends DataValidationException
+class InvalidValueException extends \RuntimeException
 {
 }

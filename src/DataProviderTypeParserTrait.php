@@ -8,7 +8,7 @@
 
 namespace Oasis\Mlib\Utils;
 
-use Oasis\Mlib\Utils\Exceptions\InvalidDataTypeException;
+use Oasis\Mlib\Utils\Exceptions\InvalidValueException;
 
 trait DataProviderTypeParserTrait
 {
@@ -24,7 +24,7 @@ trait DataProviderTypeParserTrait
         }
 
         if (!is_scalar($val)) {
-            throw new InvalidDataTypeException("Non-scalar value encountered when int is expected");
+            throw new InvalidValueException("Non-scalar value encountered when int is expected");
         }
 
         return intval($val);
@@ -37,7 +37,7 @@ trait DataProviderTypeParserTrait
         }
 
         if (!is_scalar($val)) {
-            throw new InvalidDataTypeException("Non-scalar value encountered when float is expected");
+            throw new InvalidValueException("Non-scalar value encountered when float is expected");
         }
 
         return floatval($val);
@@ -46,10 +46,10 @@ trait DataProviderTypeParserTrait
     protected function requireString(&$val)
     {
         if (is_array($val)) {
-            throw new InvalidDataTypeException("Array value is encountered when string is expected");
+            throw new InvalidValueException("Array value is encountered when string is expected");
         }
         if (is_object($val) && !method_exists($val, "__toString")) {
-            throw new InvalidDataTypeException(
+            throw new InvalidValueException(
                 "Object doesn't support __toString() method when string value is expected"
             );
         }
@@ -64,7 +64,7 @@ trait DataProviderTypeParserTrait
         }
 
         if (!is_array($val)) {
-            throw new InvalidDataTypeException("Non array encountered when array is expected");
+            throw new InvalidValueException("Non array encountered when array is expected");
         }
 
         return $val;
@@ -75,7 +75,7 @@ trait DataProviderTypeParserTrait
         $arr = $this->requireArray($val);
         foreach ($arr as $k => &$v) {
             if (!is_array($v)) {
-                throw new InvalidDataTypeException("Non array element encountered when 2D array is expected");
+                throw new InvalidValueException("Non array element encountered when 2D array is expected");
             }
         }
 
@@ -101,7 +101,7 @@ trait DataProviderTypeParserTrait
                     return false;
                     break;
                 default:
-                    throw new InvalidDataTypeException("Unknown string encountered for bool val, string = $val");
+                    throw new InvalidValueException("Unknown string encountered for bool val, string = $val");
                     break;
             }
         }
@@ -115,7 +115,7 @@ trait DataProviderTypeParserTrait
             return $val;
         }
 
-        throw new InvalidDataTypeException("Value is not an object, value = " . print_r($val, true));
+        throw new InvalidValueException("Value is not an object, value = " . print_r($val, true));
     }
 
     protected function requireMixed(&$val)

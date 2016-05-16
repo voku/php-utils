@@ -8,6 +8,7 @@
 namespace Oasis\Mlib\Utils;
 
 use Oasis\Mlib\Utils\Exceptions\InvalidDataTypeException;
+use Oasis\Mlib\Utils\Exceptions\InvalidValueException;
 use Oasis\Mlib\Utils\Exceptions\MandatoryValueMissingException;
 
 abstract class AbstractDataProvider implements DataProviderInterface
@@ -30,7 +31,7 @@ abstract class AbstractDataProvider implements DataProviderInterface
 
         if ($value === null) {
             if ($isMandatory) {
-                throw new MandatoryValueMissingException("Mandatory value $key is missing in data");
+                throw new MandatoryValueMissingException($key, "Mandatory value $key is missing in data");
             }
             else {
                 return $default;
@@ -52,13 +53,13 @@ abstract class AbstractDataProvider implements DataProviderInterface
                 ]
             )
             ) {
-                throw new InvalidDataTypeException("For key <$key>, tyype '$type' is not an allowed type");
+                throw new InvalidDataTypeException($key, "For key <$key>, tyype '$type' is not an allowed type");
             }
 
             try {
                 return $this->parseValue($type, $value);
-            } catch (InvalidDataTypeException $e) {
-                throw new InvalidDataTypeException("For key <$key>: " . $e->getMessage(), $e->getCode(), $e);
+            } catch (InvalidValueException $e) {
+                throw new InvalidDataTypeException($key, "Invalid value for key <$key>: " . $e->getMessage(), $e->getCode(), $e);
             }
         }
     }

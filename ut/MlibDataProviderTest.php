@@ -137,6 +137,15 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         $this->dp->getMandatory("java");
     }
 
+    public function testMandatoryValueMissingWithKey()
+    {
+        try {
+            $this->dp->getMandatory("java");
+        } catch (MandatoryValueMissingException $e) {
+            $this->assertEquals('java', $e->getFieldName());
+        }
+    }
+
     public function testOptionalNotExist()
     {
         $val = $this->dp->getOptional("java", ArrayDataProvider::STRING_TYPE, "bean");
