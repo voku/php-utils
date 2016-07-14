@@ -8,6 +8,14 @@ This component provides a number of PHP helper classes for common tasks.
 - [String Utilities](#string-utils)
 - [Memory Monitor Tool](#memory-usage-monitor)
 
+### Installation
+
+Install the latest version with command below:
+
+```bash
+$ composer require oasis/utils
+```
+
 ### Data Provider
 
 Normally we use data provider to create a validatable container.
