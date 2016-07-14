@@ -137,7 +137,7 @@ CommonUtils::monitorMemoryUsage();
 CommonUtils::registerMemoryMonitorForTick();
 ```
 
-[Tick] is a declare directive which PHP supports to monitor low-level code execution.
+> [Tick] is a declare directive which PHP supports to monitor low-level code execution.
 
 
 [RC4]: https://en.wikipedia.org/wiki/RC4
