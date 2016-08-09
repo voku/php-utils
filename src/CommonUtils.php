@@ -100,4 +100,22 @@ class CommonUtils
         $function_name = __CLASS__ . "::monitorMemoryUsage";
         register_tick_function($function_name);
     }
+    
+    /**
+     *
+     * makes an unsigned shift of an integer given bits
+     *
+     * @param int $num
+     * @param int $bits
+     *
+     * @return int
+     */
+    public static function unsignedRightShift($num, $bits)
+    {
+        if ($bits == 0) {
+            return $num;
+        }
+        
+        return ($num >> $bits) & ~(1 << (8 * PHP_INT_SIZE - 1) >> ($bits - 1));
+    }
 }

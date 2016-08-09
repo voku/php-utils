@@ -7,17 +7,16 @@
  * Time: 21:09
  */
 
-use Oasis\Mlib\Utils\CommonUtils;
+use Oasis\Mlib\Utils\CaesarCipher;
 
 require_once "vendor/autoload.php";
 
-declare(ticks = 10);
+$a = 'abcdefg';
 
-CommonUtils::registerMemoryMonitorForTick();
+//var_dump(unpack('c*', $a));
 
-$s = str_repeat(' ', 1024 * 1024);
-
-$a = $b = '';
-for ($i = 0; $i < 100000; ++$i){
-    $a .= $s;
-}
+$cipher = new CaesarCipher();
+$result = $cipher->encrypt($a);
+$back = $cipher->decrypt($result);
+var_dump($back);
+var_dump(unpack('C*', $back));

@@ -4,6 +4,7 @@ This component provides a number of PHP helper classes for common tasks.
 
 - [Data Provider](#data-provider)
 - [Streamed Data Packer](#data-packer)
+- [Caesar Cipher](#caesar-cipher)
 - [RC4 encryption/decryption](#rc4)
 - [String Utilities](#string-utils)
 - [Memory Monitor Tool](#memory-usage-monitor)
@@ -88,9 +89,38 @@ while ($obj = $packer->unpackFromStream()) {
 
 ```
 
+### Caesar Cipher
+
+[Caesar Cipher] is one of the earliest known and simplest ciphers. It is a type of substitution cipher in which each letter in the plaintext is 'shifted' a certain number of places down the alphabet.
+
+**oasis/utils** provides easy cipher class for Caesar Cipher:
+
+```php
+<?php
+use Oasis\Mlib\Utils\CaesarCipher;
+
+$cipher = new CaesarCipher();
+
+// encrypt and decrypt integer
+$enc = $cipher->encrypt(1234);
+$dec = $cipher->decrypt($enc); // $dec = 1234
+
+// encrypt and decrypt string
+$enc = $cipher->encrypt("abcdefg");
+$dec = $cipher->decrypt($enc); // $dec = "abcdefg"
+
+// using stronger cipher
+$cipher = new CaesarCipher(
+    32, // bits to use in partition, default to 32, must be divisable by partition size
+    8,  // partition size, even positive number, default to 8
+    12  // strength, positive number, default to 5
+);
+
+```
+
 ### RC4
 
-[RC4] is a very simple stream cipher. [oasis/utils]() provides quick
+[RC4] is a very simple stream cipher. **oasis/utils** provides quick
 access to [RC4] encryption. Below is an example:
 
 ```php
@@ -128,7 +158,7 @@ var_dump(StringUtils::stringChopdown($str, 4)); // 'abcd'
 ### Memory Usage Monitor
 
 Sometimes, PHP script can run out of memory. It is especially important to monitor
-memory usage is a long-running script. [oasis/utils]() provides some tools for 
+memory usage is a long-running script. [oasis/utils]() provides some tools for
 memory usage monitor and management on-the-fly.
 
 Example:
@@ -147,8 +177,6 @@ CommonUtils::registerMemoryMonitorForTick();
 
 > [Tick] is a declare directive which PHP supports to monitor low-level code execution.
 
-
+[Caesar Cipher]: https://en.wikipedia.org/wiki/Caesar_cipher
 [RC4]: https://en.wikipedia.org/wiki/RC4
 [Tick]: http://php.net/manual/en/control-structures.declare.php#control-structures.declare.ticks
-
-
