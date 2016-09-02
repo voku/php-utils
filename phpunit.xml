@@ -15,6 +15,10 @@
             <file>ut/ObjectValidatorTest.php</file>
             <file>ut/BooleanValidatorTest.php</file>
             <file>ut/ArrayValidatorTest.php</file>
+            <file>ut/StringLengthValidatorTest.php</file>
+            <file>ut/EmailValidatorTest.php</file>
+            <file>ut/UrlValidatorTest.php</file>
+            <file>ut/RegexValidatorTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -44,6 +44,7 @@ class BooleanValidator
                         "off",
                         "0",
                         "no",
+                        "",
                     ],
                     true
                 )) {

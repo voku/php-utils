@@ -81,7 +81,6 @@ class BooleanValidatorTest extends PHPUnit_Framework_TestCase
     public function getInvalidInputInNonStrictMode()
     {
         return [
-            [''],
             ['1.0'],
             ['0.0'],
             [new stdClass()],
@@ -104,6 +103,7 @@ class BooleanValidatorTest extends PHPUnit_Framework_TestCase
             ['no'],
             ['true'],
             ['false'],
+            [''],
             [1],
             [0],
             [1.0],
