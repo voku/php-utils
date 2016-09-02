@@ -14,13 +14,12 @@ class DataValidationException extends \RuntimeException
      * @var string
      */
     protected $fieldName;
-
-    public function __construct($fieldName, $message = "", $code = 0, \Exception $previous = null)
+    
+    public function __construct($message = "", $code = 0, \Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
-        $this->fieldName = $fieldName;
     }
-
+    
     /**
      * @return string
      */
@@ -28,5 +27,20 @@ class DataValidationException extends \RuntimeException
     {
         return $this->fieldName;
     }
-
+    
+    /**
+     * @param string $fieldName
+     */
+    public function setFieldName($fieldName)
+    {
+        $this->fieldName = $fieldName;
+    }
+    
+    public function withFieldName($fieldName)
+    {
+        $this->fieldName = $fieldName;
+        
+        return $this;
+    }
+    
 }
