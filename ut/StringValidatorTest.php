@@ -90,7 +90,6 @@ class StringValidatorTest extends PHPUnit_Framework_TestCase
             [1.1],
             [true],
             [false],
-            [null],
         
         ];
     }
@@ -101,6 +100,7 @@ class StringValidatorTest extends PHPUnit_Framework_TestCase
             [[]],
             [['abc']],
             [new stdClass()],
+            [null],
         ];
     }
     

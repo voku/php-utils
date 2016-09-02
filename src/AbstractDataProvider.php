@@ -22,7 +22,25 @@ use Oasis\Mlib\Utils\Validators\ValidatorInterface;
 
 abstract class AbstractDataProvider implements DataProviderInterface
 {
-    //use DataProviderTypeParserTrait;
+    public function has($key, $validator = self::MIXED_TYPE)
+    {
+        $value = $this->getValue($key);
+        if ($value === null) {
+            return false;
+        }
+        
+        if (!$validator instanceof ValidatorInterface) {
+            $validator = $this->getValidatorByLegacyString($validator);
+        }
+        
+        try {
+            $value = $validator->validate($value);
+            
+            return ($value !== null);
+        } catch (DataValidationException $e) {
+            return false;
+        }
+    }
     
     /**
      * @param string                    $key
@@ -83,6 +101,9 @@ abstract class AbstractDataProvider implements DataProviderInterface
         switch ($type) {
             case self::STRING_TYPE:
                 return new StringValidator();
+                break;
+            case self::NON_EMPTY_STRING_TYPE:
+                return new StringValidator(false, false);
                 break;
             case self::INT_TYPE:
                 return new IntegerValidator();

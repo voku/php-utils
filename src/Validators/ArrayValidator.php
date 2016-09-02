@@ -18,7 +18,7 @@ class ArrayValidator implements ValidatorInterface
     /** @var ValidatorInterface */
     protected $elementValidator;
     
-    public function __construct($allowNull = true, $elementValidator = null)
+    public function __construct($allowNull = false, $elementValidator = null)
     {
         $this->allowNull = $allowNull;
         if ($elementValidator == null) {

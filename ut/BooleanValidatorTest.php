@@ -87,6 +87,7 @@ class BooleanValidatorTest extends PHPUnit_Framework_TestCase
             [new stdClass()],
             [[]],
             [[123]],
+            [null],
         ];
     }
     
@@ -107,7 +108,6 @@ class BooleanValidatorTest extends PHPUnit_Framework_TestCase
             [0],
             [1.0],
             [0.0],
-            [null],
         ];
     }
     

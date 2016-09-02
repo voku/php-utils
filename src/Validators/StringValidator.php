@@ -26,10 +26,7 @@ class StringValidator implements ValidatorInterface
     public function validate($target)
     {
         if (!$this->strict) {
-            if (is_null($target)) {
-                $target = 'null';
-            }
-            elseif (is_bool($target)) {
+            if (is_bool($target)) {
                 $target = $target ? "true" : "false";
             }
             elseif (is_scalar($target)) {

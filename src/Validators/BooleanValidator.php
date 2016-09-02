@@ -58,9 +58,6 @@ class BooleanValidator
                     $target = false;
                 }
             }
-            elseif (is_null($target)) {
-                $target = false;
-            }
         }
         
         if (!is_bool($target)) {

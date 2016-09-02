@@ -7,6 +7,7 @@
  */
 
 use Oasis\Mlib\Utils\ArrayDataProvider;
+use Oasis\Mlib\Utils\Exceptions\DataEmptyException;
 use Oasis\Mlib\Utils\Exceptions\InvalidDataTypeException;
 use Oasis\Mlib\Utils\Exceptions\MandatoryValueMissingException;
 
@@ -21,11 +22,13 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
             "int"          => 1,
             "float"        => 2.4,
             "string"       => "name",
+            "empty"        => "",
             "array"        => [
                 0,
                 1,
                 2,
             ],
+            "null"         => null,
             "object"       => new \stdClass(),
             "bool"         => true,
             "bool_str_on"  => "on",
@@ -53,6 +56,19 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         $this->dp = new ArrayDataProvider($data);
     }
     
+    public function testHas()
+    {
+        self::assertTrue($this->dp->has('int'));
+        self::assertTrue($this->dp->has('int', ArrayDataProvider::INT_TYPE));
+        self::assertTrue($this->dp->has('float', ArrayDataProvider::FLOAT_TYPE));
+        self::assertTrue($this->dp->has('string', ArrayDataProvider::STRING_TYPE));
+        self::assertTrue($this->dp->has('empty', ArrayDataProvider::STRING_TYPE));
+        self::assertTrue($this->dp->has('array'));
+        self::assertTrue($this->dp->has('array', ArrayDataProvider::ARRAY_TYPE));
+        self::assertTrue($this->dp->has('object'));
+        self::assertTrue($this->dp->has('object', ArrayDataProvider::OBJECT_TYPE));
+    }
+    
     public function testGet()
     {
         self::assertEquals(1, $this->dp->getMandatory("int", ArrayDataProvider::INT_TYPE));
@@ -68,6 +84,34 @@ class MlibDataProviderTest extends PHPUnit_Framework_TestCase
         );
         self::assertNotEquals(0, $this->dp->getMandatory("string", ArrayDataProvider::MIXED_TYPE));
         self::assertEquals('name', $this->dp->getMandatory("string", ArrayDataProvider::MIXED_TYPE));
+    }
+    
+    /**
+     * @dataProvider
+     */
+    public function testNull()
+    {
+        self::setExpectedException(MandatoryValueMissingException::class);
+        $this->dp->getMandatory('null', ArrayDataProvider::INT_TYPE);
+    }
+    
+    public function getValidatorsForNullTest()
+    {
+        return [
+            [ArrayDataProvider::INT_TYPE],
+            [ArrayDataProvider::FLOAT_TYPE],
+            [ArrayDataProvider::STRING_TYPE],
+            [ArrayDataProvider::BOOL_TYPE],
+            [ArrayDataProvider::ARRAY_TYPE],
+            [ArrayDataProvider::MIXED_TYPE],
+        ];
+    }
+    
+    public function testNonEmpytString()
+    {
+        self::assertEquals('', $this->dp->getMandatory('empty', ArrayDataProvider::STRING_TYPE));
+        self::setExpectedException(DataEmptyException::class);
+        $this->dp->getMandatory('empty', ArrayDataProvider::NON_EMPTY_STRING_TYPE);
     }
     
     public function testHierarchicalGet()
