@@ -3,7 +3,7 @@
     "description": "Various utility classes & functions",
     "type"       : "library",
     "require"    : {
-        "voku/portable-utf8": "^1.6"
+        "voku/portable-utf8": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.1"
